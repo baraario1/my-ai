@@ -99,6 +99,8 @@ const t=inp.value.trim();if(!t||busy)return;
 hero.remove();inp.value="";inp.style.height="auto";busy=true;check();
 add("user",t);
 history.push({role:"user",content:t});
+saveHistory();
+
 const b=add("bot","");b.innerHTML='<span class="dots"><span></span><span></span><span></span></span>';
 try{
 const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});
