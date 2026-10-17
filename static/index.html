@@ -72,7 +72,22 @@ textarea{flex:1;border:0;outline:0;resize:none;background:transparent;color:var(
 </div>
 <script>
 const chat=document.getElementById("chat"),inp=document.getElementById("in"),btn=document.getElementById("send"),hero=document.getElementById("hero");
-let history=[],busy=false;
+let history = [];
+let busy = false;
+
+try {
+  const saved = localStorage.getItem("baraa_ai_history");
+  if (saved) {
+    history = JSON.parse(saved);
+    if (!Array.isArray(history)) history = [];
+  }
+} catch {
+  history = [];
+}
+
+function saveHistory() {
+  localStorage.setItem("baraa_ai_history", JSON.stringify(history));
+}
 function check(){btn.disabled=busy||!inp.value.trim()}
 inp.addEventListener("input",()=>{inp.style.height="auto";inp.style.height=inp.scrollHeight+"px";check()});
 inp.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();go()}});
