@@ -107,6 +107,7 @@ const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"applicatio
 const data=await res.json();
 if(!res.ok){const er=new Error();er.userMsg=data.error;throw er}
 b.textContent=data.reply;history.push({role:"assistant",content:data.reply});
+saveHistory();
 }catch(e){
 b.textContent=e.userMsg||"صار خطأ، جرّب مرة ثانية.";
 history.pop();
