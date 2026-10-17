@@ -84,6 +84,9 @@ try {
 } catch {
   history = [];
 }
+history.forEach(msg => {
+  add(msg.role === "user" ? "user" : "bot", msg.content);
+});
 
 function saveHistory() {
   localStorage.setItem("baraa_ai_history", JSON.stringify(history));
